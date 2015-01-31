@@ -41,6 +41,7 @@ INSTALLED_APPS = (
 
     'core',
     'rest_framework',
+    'rest_framework.authtoken',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -57,6 +58,15 @@ ROOT_URLCONF = 'cityreport.urls'
 
 WSGI_APPLICATION = 'cityreport.wsgi.application'
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    )
+}
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
