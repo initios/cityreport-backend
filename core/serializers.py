@@ -11,3 +11,4 @@ class TypeSerializer(serializers.HyperlinkedModelSerializer):
 class IssueSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.Issue
+        exclude = ('location', 'state')
