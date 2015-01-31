@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from external.repara_api import ReparaCiudad
 
 from . import models, serializers
+from external.repara_api import ReparaCiudad
 
 
 class IssueViewSet(mixins.CreateModelMixin,
