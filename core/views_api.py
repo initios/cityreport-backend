@@ -8,7 +8,7 @@ class IssueViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.IssueSerializer
 
 
-class TypeViewSet(viewsets.ModelViewSet):
+class TypeViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.Type.objects.all()
     serializer_class = serializers.TypeSerializer
 
