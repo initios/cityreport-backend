@@ -37,12 +37,12 @@ class ReparaCiudad:
         city_objs = self.retrieve_city(city)
 
         for object in city_objs:
-            if 'id' in object:
+            if 'id' in object and object['latitud'] and object['longitud']:
                 issue = Issue()
                 issue.lat = float(object['latitud'])
                 issue.lon = float(object['longitud'])
-                issue.address = object['direccion']
-                issue.description = object['desperfectoTexto'].replace("Tipo de incidencia: ", '')
+                issue.address = object['direccion'] or ' '
+                issue.description = object['desperfectoTexto'].replace("Tipo de incidencia: ", '') or ' '
 
                 if object['desperfecto'] in self.crash:
                     issue.type = models.Type.objects.get(pk=5)
