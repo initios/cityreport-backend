@@ -1,6 +1,6 @@
 from rest_framework import serializers, fields
 
-from . import models, services
+from . import models
 
 
 class TypeSerializer(serializers.ModelSerializer):
@@ -17,5 +17,5 @@ class IssueSerializer(serializers.ModelSerializer):
     state = fields.CharField(read_only=True)
     county = fields.CharField(read_only=True)
     country = fields.CharField(read_only=True)
-    type = serializers.PrimaryKeyRelatedField(queryset=models.Type.objects.all())
-    type_nested = TypeSerializer(read_only=True, source='type')
+    type_id = serializers.PrimaryKeyRelatedField(queryset=models.Type.objects.all())
+    type = TypeSerializer(read_only=True)
