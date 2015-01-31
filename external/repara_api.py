@@ -1,4 +1,5 @@
 import requests, base64
+from core import models
 
 from core.models import Issue
 
@@ -27,35 +28,36 @@ class ReparaCiudad:
 
         city_encode = self.encode_city(city)
 
-        r = requests.get('http://reparaciudad.com/incidencia/cargarResultadosBusquedas/0/0/1/0/0/'
-                         + city_encode)
+        r = requests.get('http://reparaciudad.com/incidencia/cargarResultadosBusquedas/0/0/1/0/0/' + city_encode)
 
         return r.json()
 
     def save_city(self, city):
 
-        city_objs = self.retrieve_city(self, city)
+        city_objs = self.retrieve_city(city)
 
         for object in city_objs:
             if 'id' in object:
                 issue = Issue()
-                issue.lat =float(object['latitud'])
+                issue.lat = float(object['latitud'])
                 issue.lon = float(object['longitud'])
                 issue.address = object['direccion']
-                issue.description = object['desperfectoTexto']
+                issue.description = object['desperfectoTexto'].replace("Tipo de incidencia: ", '')
 
                 if object['desperfecto'] in self.crash:
-                    issue.type_id = 5
+                    issue.type = models.Type.objects.get(pk=5)
                 elif object['desperfecto'] in self.disturb:
-                    issue.type_id = 4
+                    issue.type = models.Type.objects.get(pk=4)
                 elif object['desperfecto'] in self.noise_polution:
-                    issue.type_id = 2
+                    issue.type = models.Type.objects.get(pk=2)
                 elif object['desperfecto'] in self.vandalism:
-                    issue.type_id = 1
+                    issue.type = models.Type.objects.get(pk=1)
+                else:
+                    issue.type = models.Type.objects.get(pk=9)
 
                 issue.save()
 
-    def encode_city(city):
+    def encode_city(self, city):
         string = bytes(city, 'utf-8')
         b64bytes = base64.encodebytes(string)
         b64auth = b64bytes.decode('ascii')

@@ -46,12 +46,10 @@ class PopulateExternalIssues(generics.GenericAPIView):
     serializer_class = serializers.PopulateExternalSerializer
 
     def post(self, request):
+        repair = ReparaCiudad()
+        repair.save_city(request.data['city'])
 
-        serializer = serializers.IssueSerializer
-        data=request.data
-        city_json = ReparaCiudad.save_city(ReparaCiudad, data['city'])
-
-        data = {"detail": city_json}
+        data = {"detail": 'Data from city %s was saved' % request.data['city']}
 
         return Response(data, status.HTTP_200_OK)
 
