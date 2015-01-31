@@ -2,8 +2,8 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-import model_utils.fields
 import django.utils.timezone
+import model_utils.fields
 
 
 class Migration(migrations.Migration):
@@ -15,18 +15,17 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Issue',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True, serialize=False)),
+                ('id', models.AutoField(primary_key=True, serialize=False, auto_created=True, verbose_name='ID')),
                 ('created', model_utils.fields.AutoCreatedField(editable=False, verbose_name='created', default=django.utils.timezone.now)),
                 ('modified', model_utils.fields.AutoLastModifiedField(editable=False, verbose_name='modified', default=django.utils.timezone.now)),
                 ('lat', models.FloatField(verbose_name='Latitude')),
                 ('lon', models.FloatField(verbose_name='Longitude')),
                 ('description', models.TextField(verbose_name='Description')),
-                ('location', models.CharField(max_length=255, verbose_name='Location')),
-                ('postal_code', models.CharField(max_length=255, verbose_name='Postal Code')),
-                ('city', models.CharField(max_length=255, verbose_name='City')),
-                ('state', models.CharField(max_length=255, verbose_name='State')),
-                ('county', models.CharField(max_length=255, verbose_name='County')),
-                ('country', models.CharField(max_length=255, verbose_name='Country')),
+                ('postal_code', models.CharField(verbose_name='Postal Code', max_length=255)),
+                ('city', models.CharField(verbose_name='City', max_length=255)),
+                ('state', models.CharField(verbose_name='State', max_length=255)),
+                ('county', models.CharField(verbose_name='County', max_length=255)),
+                ('country', models.CharField(verbose_name='Country', max_length=255)),
             ],
             options={
                 'abstract': False,
@@ -36,10 +35,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Type',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True, serialize=False)),
+                ('id', models.AutoField(primary_key=True, serialize=False, auto_created=True, verbose_name='ID')),
                 ('created', model_utils.fields.AutoCreatedField(editable=False, verbose_name='created', default=django.utils.timezone.now)),
                 ('modified', model_utils.fields.AutoLastModifiedField(editable=False, verbose_name='modified', default=django.utils.timezone.now)),
-                ('name', models.CharField(max_length=255, verbose_name='Name')),
+                ('name', models.CharField(verbose_name='Name', max_length=255)),
             ],
             options={
                 'abstract': False,
@@ -49,7 +48,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='issue',
             name='type',
-            field=models.ForeignKey(to='core.Type', verbose_name='Type'),
+            field=models.ForeignKey(verbose_name='Type', to='core.Type'),
             preserve_default=True,
         ),
     ]
