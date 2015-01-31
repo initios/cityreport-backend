@@ -17,3 +17,5 @@ class IssueSerializer(serializers.HyperlinkedModelSerializer):
     state = fields.CharField(read_only=True)
     county = fields.CharField(read_only=True)
     country = fields.CharField(read_only=True)
+
+    type = TypeSerializer()
