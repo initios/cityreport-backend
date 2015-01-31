@@ -1,10 +1,14 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+from rest_framework.routers import DefaultRouter
 
-urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'cityreport.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
+from core import views_api
 
+router = DefaultRouter()
+router.register(r'issues', views_api.IssueViewSet)
+
+urlpatterns = patterns(
+    '',
+    url(r'^api-rest/', include(router.urls)),
     url(r'^admin/', include(admin.site.urls)),
 )
