@@ -3,3 +3,4 @@ djangorestframework==3.0.4
 django-model-utils>=2.2,<2.3
 gunicorn
 dj-static==0.0.6
+dj-database-url
