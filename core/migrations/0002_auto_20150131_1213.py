@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('core', '0001_initial'),
-    ]
+        ]
 
     operations = [
         migrations.RunPython(add_default_issues_types),
