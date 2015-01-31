@@ -5,7 +5,9 @@ from rest_framework.routers import DefaultRouter
 from core import views_api
 
 router = DefaultRouter()
+router.register(r'types', views_api.TypeViewSet)
 router.register(r'issues', views_api.IssueViewSet)
+
 
 urlpatterns = patterns(
     '',
