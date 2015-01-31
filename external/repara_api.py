@@ -18,6 +18,11 @@ class ReparaCiudad:
     TRANVIA = 12
     AUTOBUS = 13
 
+    crash = (VEHICULOS, TRANSPORTE_PUBLICO, RENFE, FGC, TRANVIA, AUTOBUS)
+    disturb = (VIA_PUBLICA, OTRAS, ARBOLADO)
+    noise_polution = (OTRAS, SEMAFOROS)
+    vandalism = (LIMPIEZA, MOBILIARIO_URBANO)
+
     def retrieve_city(self, city):
 
         city_encode = self.encode_city(city)
@@ -32,12 +37,21 @@ class ReparaCiudad:
         city_objs = self.retrieve_city(self, city)
 
         for object in city_objs:
-            if object.has_key('id'):
+            if 'id' in object:
                 issue = Issue()
-                issue.lat = object.latitud
-                issue.lon = object.longitud
-                issue.address = object.direccion
-                issue.description = object.desperfectoTexto
+                issue.lat =float(object['latitud'])
+                issue.lon = float(object['longitud'])
+                issue.address = object['direccion']
+                issue.description = object['desperfectoTexto']
+
+                if object['desperfecto'] in self.crash:
+                    issue.type_id = 5
+                elif object['desperfecto'] in self.disturb:
+                    issue.type_id = 4
+                elif object['desperfecto'] in self.noise_polution:
+                    issue.type_id = 2
+                elif object['desperfecto'] in self.vandalism:
+                    issue.type_id = 1
 
                 issue.save()
 
