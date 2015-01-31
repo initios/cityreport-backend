@@ -14,4 +14,3 @@ class IssueViewSet(mixins.CreateModelMixin,
 class TypeViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.Type.objects.all()
     serializer_class = serializers.TypeSerializer
-
