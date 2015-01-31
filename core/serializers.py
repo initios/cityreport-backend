@@ -12,6 +12,7 @@ class IssueSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Issue
 
+    address = fields.CharField(read_only=True)
     postal_code = fields.CharField(read_only=True)
     city = fields.CharField(read_only=True)
     state = fields.CharField(read_only=True)
