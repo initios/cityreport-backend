@@ -19,3 +19,8 @@ class IssueSerializer(serializers.ModelSerializer):
     country = fields.CharField(read_only=True)
     type = serializers.PrimaryKeyRelatedField(queryset=models.Type.objects.all())
     type_nested = TypeSerializer(read_only=True, source='type')
+
+
+class PopulateExternalSerializer(serializers.Serializer):
+    city = fields.CharField(write_only=True)
+
