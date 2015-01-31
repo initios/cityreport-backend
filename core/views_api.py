@@ -42,6 +42,12 @@ class TopCitiesStatsView(views.APIView):
         return Response(data, 200)
 
 
+class TopCountiesStatsView(views.APIView):
+    def get(self, request, format=None):
+        data = models.Issue.objects.values('county').order_by('-matches').annotate(matches=Count('county'))[:10]
+        return Response(data, 200)
+
+
 class PopulateExternalIssues(generics.GenericAPIView):
     serializer_class = serializers.PopulateExternalSerializer
 
