@@ -42,7 +42,7 @@ class TopCitiesStatsView(views.APIView):
 
 
 class PopulateExternalIssues(generics.GenericAPIView):
-    serializer_class = serializers.IssueSerializer
+    serializer_class = serializers.PopulateExternalSerializer
 
     def post(self, request):
 

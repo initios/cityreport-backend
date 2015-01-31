@@ -19,3 +19,7 @@ class IssueSerializer(serializers.ModelSerializer):
     country = fields.CharField(read_only=True)
     type_id = serializers.PrimaryKeyRelatedField(queryset=models.Type.objects.all())
     type = TypeSerializer(read_only=True)
+
+
+class PopulateExternalSerializer(serializers.Serializer):
+    city = fields.CharField(write_only=True)
