@@ -42,10 +42,12 @@ INSTALLED_APPS = (
     'core',
     'rest_framework',
     'rest_framework.authtoken',
+    'corsheaders',
 )
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -96,3 +98,8 @@ USE_TZ = True
 
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
+
+# Configure django-cors-headers
+# https://github.com/ottoyiu/django-cors-headers/#configuration
+
+CORS_ORIGIN_ALLOW_ALL = True
