@@ -1,6 +1,6 @@
-from rest_framework import serializers
+from rest_framework import serializers, fields
 
-from . import models
+from . import models, services
 
 
 class TypeSerializer(serializers.HyperlinkedModelSerializer):
@@ -11,4 +11,9 @@ class TypeSerializer(serializers.HyperlinkedModelSerializer):
 class IssueSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.Issue
-        exclude = ('postal_code', 'city', 'county', 'country')
+
+    postal_code = fields.CharField(read_only=True)
+    city = fields.CharField(read_only=True)
+    state = fields.CharField(read_only=True)
+    county = fields.CharField(read_only=True)
+    country = fields.CharField(read_only=True)

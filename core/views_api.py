@@ -10,9 +10,6 @@ class IssueViewSet(mixins.CreateModelMixin,
     queryset = models.Issue.objects.all()
     serializer_class = serializers.IssueSerializer
 
-    def create(self, request, *args, **kwargs):
-        return super().create(request, *args, **kwargs)
-
 
 class TypeViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.Type.objects.all()
