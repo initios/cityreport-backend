@@ -1,5 +1,9 @@
 from django.db.models import Count
 
+from rest_framework import viewsets, mixins, generics, status
+from rest_framework.response import Response
+
+
 from rest_framework import viewsets, mixins, views
 from rest_framework.response import Response
 
@@ -35,3 +39,17 @@ class TopCitiesStatsView(views.APIView):
     def get(self, request, format=None):
         data = models.Issue.objects.values('city').order_by('-matches').annotate(matches=Count('city'))[:10]
         return Response(data, 200)
+
+
+class PopulateExternalIssues(generics.GenericAPIView):
+    serializer_class = serializers.IssueSerializer
+
+    def post(self, request):
+
+        serializer = serializers.IssueSerializer
+
+        data = {"detail": "ok"}
+
+        return Response(data, status.HTTP_200_OK)
+
+populate = PopulateExternalIssues.as_view()
