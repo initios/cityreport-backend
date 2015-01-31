@@ -11,7 +11,8 @@ router.register(r'issues', views_api.IssueViewSet)
 
 urlpatterns = patterns(
     '',
-     url(r'^$', views.index, name='index'),
+    url(r'^$', views.index, name='index'),
+    url(r'^api-rest/top/cities/$', views_api.TopCitiesStatsView.as_view(), name='top_cities'),
     url(r'^api-rest/', include(router.urls)),
     url(r'^admin/', include(admin.site.urls)),
 )
