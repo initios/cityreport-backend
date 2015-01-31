@@ -6,6 +6,9 @@ from model_utils.models import TimeStampedModel
 class Type(TimeStampedModel):
     name = models.CharField(verbose_name=_('Name'), max_length=255)
 
+    def __str__(self):
+        return self.name
+
 
 class Issue(TimeStampedModel):
     type = models.ForeignKey(Type, verbose_name=_('Type'))
@@ -15,4 +18,7 @@ class Issue(TimeStampedModel):
     description = models.TextField(verbose_name=_('Description'))
     location = models.CharField(verbose_name=_('Location'), max_length=255)
     state = models.CharField(verbose_name=_('State'), max_length=255)
+
+    def __str__(self):
+        return self.description
 
