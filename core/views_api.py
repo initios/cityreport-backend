@@ -3,6 +3,8 @@ from django.db.models import Count
 from rest_framework import viewsets, mixins, generics, status
 from rest_framework.response import Response
 
+from . import models, serializers
+from external.repara_api import ReparaCiudad
 
 from rest_framework import viewsets, mixins, views
 from rest_framework.response import Response
@@ -47,8 +49,10 @@ class PopulateExternalIssues(generics.GenericAPIView):
     def post(self, request):
 
         serializer = serializers.IssueSerializer
+        data=request.data
+        city_json = ReparaCiudad.save_city(ReparaCiudad, data['city'])
 
-        data = {"detail": "ok"}
+        data = {"detail": city_json}
 
         return Response(data, status.HTTP_200_OK)
 

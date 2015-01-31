@@ -4,6 +4,7 @@ from model_utils.models import TimeStampedModel
 
 from . import services
 
+
 class Type(TimeStampedModel):
     name = models.CharField(verbose_name=_('Name'), max_length=255)
 
@@ -17,6 +18,7 @@ class Issue(TimeStampedModel):
     lat = models.FloatField(_('Latitude'))
     lon = models.FloatField(_('Longitude'))
     description = models.TextField(verbose_name=_('Description'))
+    address = models.TextField(verbose_name=_('Dirección'))
     postal_code = models.CharField(verbose_name=_('Postal Code'), max_length=255, blank=False)
     city = models.CharField(verbose_name=_('City'), max_length=255, blank=False)
     state = models.CharField(verbose_name=_('State'), max_length=255, blank=False)
