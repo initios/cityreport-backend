@@ -3,12 +3,12 @@ from rest_framework import serializers, fields
 from . import models, services
 
 
-class TypeSerializer(serializers.HyperlinkedModelSerializer):
+class TypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Type
 
 
-class IssueSerializer(serializers.HyperlinkedModelSerializer):
+class IssueSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Issue
 
@@ -17,5 +17,5 @@ class IssueSerializer(serializers.HyperlinkedModelSerializer):
     state = fields.CharField(read_only=True)
     county = fields.CharField(read_only=True)
     country = fields.CharField(read_only=True)
-
-    type = TypeSerializer()
+    type = serializers.PrimaryKeyRelatedField(queryset=models.Type.objects.all())
+    type_nested = TypeSerializer(read_only=True, source='type')
