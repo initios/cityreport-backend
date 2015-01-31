@@ -10,7 +10,7 @@ def reverse_geocode(lat, lon):
         'state': results.state,
         'county': results.county,
         'country': results.country,
-        'address': results.address or '',
+        'address': str(results),
     }
 
     return data
